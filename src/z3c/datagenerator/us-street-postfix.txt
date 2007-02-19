@@ -1,0 +1,7 @@
+Avenue
+Street
+Road
+Lane
+Circle
+Cove
+Terrace
