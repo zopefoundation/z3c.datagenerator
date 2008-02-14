@@ -2,7 +2,7 @@
 CHANGES
 =======
 
-unreleased
-----------
+0.0.1 (2008-02-14)
+------------------
 
 - Initial Release
