@@ -20,6 +20,7 @@ import csv
 import datetime
 import os
 import random
+from zlib import crc32
 import zope.interface
 
 from z3c.datagenerator import interfaces
@@ -30,7 +31,7 @@ class VocabularyDataGenerator(object):
     zope.interface.implements(interfaces.IDataGenerator)
 
     def __init__(self, seed, vocabulary):
-        self.random = random.Random(seed)
+        self.random = random.Random(crc32(seed))
         self.vocabulary = vocabulary
 
     def get(self):
@@ -50,7 +51,7 @@ class FileDataGenerator(object):
     path = os.path.dirname(__file__)
 
     def __init__(self, seed, filename):
-        self.random = random.Random(seed+filename)
+        self.random = random.Random(crc32(seed+filename))
         self.values = self._read(filename)
 
     def get(self):
@@ -86,7 +87,7 @@ class DateDataGenerator(object):
     zope.interface.implements(interfaces.IDateDataGenerator)
 
     def __init__(self, seed, start=None, end=None):
-        self.random = random.Random(seed+'ssn')
+        self.random = random.Random(crc32(seed+'ssn'))
         self.start = start or datetime.date(2000, 1, 1)
         self.end = end or datetime.date(2007, 1, 1)
 
