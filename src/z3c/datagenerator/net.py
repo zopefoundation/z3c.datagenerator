@@ -18,7 +18,6 @@ $Id$
 __docformat__ = "reStructuredText"
 import os
 import random
-from zlib import crc32
 import zope.interface
 
 from z3c.datagenerator import demographics, generator, interfaces
@@ -29,7 +28,7 @@ class IPv4DataGenerator(object):
     zope.interface.implements(interfaces.IDataGenerator)
 
     def __init__(self, seed):
-        self.random = random.Random(crc32(seed+'ip'))
+        self.random = random.Random(generator.consistent_hash(seed+'ip'))
 
     def get(self):
         """Select a value from the values list and return it."""
@@ -49,7 +48,7 @@ class UsernameDataGenerator(object):
     pattern = u'%(firstInitial)s%(lastName)s'
 
     def __init__(self, seed):
-        self.random = random.Random(crc32(seed+'username'))
+        self.random = random.Random(generator.consistent_hash(seed+'username'))
         self.firstNames = demographics.FirstNameGenerator(seed)
         self.lastNames = demographics.LastNameGenerator(seed)
 
@@ -81,7 +80,7 @@ class EMailDataGenerator(object):
     pattern = '%(uname)s@%(domain)s%(tld)s'
 
     def __init__(self, seed):
-        self.random = random.Random(crc32(seed+'username'))
+        self.random = random.Random(generator.consistent_hash(seed+'username'))
         self.usernames = UsernameDataGenerator(seed)
         self.words = generator.TextDataGenerator(seed, self.wordsFile)
         self.tlds = generator.CSVDataGenerator(seed, self.tldsFile)

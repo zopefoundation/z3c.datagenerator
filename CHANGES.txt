@@ -2,8 +2,19 @@
 CHANGES
 =======
 
+0.0.3 (2008-12-03)
+------------------
+
+- Refined the seed generation further: zlib.crc32() in 32 bit Python can
+  generate negative hashes, while 64 bit Python does not.  Enforced
+  positive hashes.
+
+- Began a test suite.
+
+
 0.0.2 (2008-12-02)
 ------------------
+
 - Use the crc32 function to hash random seeds so that the
   same random sequences are generated on both 32 bit and 64 bit
   builds of Python.

@@ -18,7 +18,6 @@ $Id$
 __docformat__ = "reStructuredText"
 import os
 import random
-from zlib import crc32
 import zope.interface
 
 from z3c.datagenerator import generator
@@ -41,7 +40,7 @@ class SSNDataGenerator(object):
     """A social security data generator."""
 
     def __init__(self, seed):
-        self.random = random.Random(crc32(seed+'ssn'))
+        self.random = random.Random(generator.consistent_hash(seed+'ssn'))
 
     def get(self):
         """Compute a social security number."""
@@ -64,7 +63,7 @@ class AddressDataGenerator(object):
     apts = True
 
     def __init__(self, seed):
-        self.random = random.Random(crc32(seed+'address'))
+        self.random = random.Random(generator.consistent_hash(seed+'address'))
         path = os.path.dirname(__file__)
 
         file = open(os.path.join(path, self.streetNamesFile), 'r')
@@ -111,7 +110,7 @@ class PhoneDataGenerator(object):
     template = u'%i-%.3i-%.4i'
 
     def __init__(self, seed):
-        self.random = random.Random(crc32(seed+'ssn'))
+        self.random = random.Random(generator.consistent_hash(seed+'ssn'))
 
     def get(self):
         """Compute a social security number."""

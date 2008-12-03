@@ -61,4 +61,5 @@ setup (
         'zope.schema',
         ],
     zip_safe = False,
+    test_suite = 'z3c.datagenerator.tests.test_doc.test_suite',
 )

@@ -26,12 +26,18 @@ import zope.interface
 from z3c.datagenerator import interfaces
 
 
+def consistent_hash(buf):
+    # Produce a hash of a string that behaves consistently in Python 32 and
+    # 64 bit.  The "& 0xffffffff" interprets negative numbers as positive.
+    return crc32(buf) & 0xffffffff
+
+
 class VocabularyDataGenerator(object):
     """Vocabulary-based data generator"""
     zope.interface.implements(interfaces.IDataGenerator)
 
     def __init__(self, seed, vocabulary):
-        self.random = random.Random(crc32(seed))
+        self.random = random.Random(consistent_hash(seed))
         self.vocabulary = vocabulary
 
     def get(self):
@@ -51,7 +57,7 @@ class FileDataGenerator(object):
     path = os.path.dirname(__file__)
 
     def __init__(self, seed, filename):
-        self.random = random.Random(crc32(seed+filename))
+        self.random = random.Random(consistent_hash(seed+filename))
         self.values = self._read(filename)
 
     def get(self):
@@ -87,7 +93,7 @@ class DateDataGenerator(object):
     zope.interface.implements(interfaces.IDateDataGenerator)
 
     def __init__(self, seed, start=None, end=None):
-        self.random = random.Random(crc32(seed+'ssn'))
+        self.random = random.Random(consistent_hash(seed+'ssn'))
         self.start = start or datetime.date(2000, 1, 1)
         self.end = end or datetime.date(2007, 1, 1)
 
