@@ -2,6 +2,13 @@
 CHANGES
 =======
 
+0.0.2 (2008-12-02)
+------------------
+- Use the crc32 function to hash random seeds so that the
+  same random sequences are generated on both 32 bit and 64 bit
+  builds of Python.
+
+
 0.0.1 (2008-02-14)
 ------------------
 
