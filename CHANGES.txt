@@ -2,6 +2,11 @@
 CHANGES
 =======
 
+0.0.4 (unreleased)
+------------------
+
+- Windows: ``consistent_hash`` make the return value an ``int``
+
 0.0.3 (2008-12-03)
 ------------------
 
