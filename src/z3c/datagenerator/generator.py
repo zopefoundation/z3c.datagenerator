@@ -29,7 +29,7 @@ from z3c.datagenerator import interfaces
 def consistent_hash(buf):
     # Produce a hash of a string that behaves consistently in Python 32 and
     # 64 bit.  The "& 0xffffffff" interprets negative numbers as positive.
-    return int(crc32(buf) & 0xffffffff)
+    return crc32(buf) & 0xffffffff
 
 
 class VocabularyDataGenerator(object):

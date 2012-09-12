@@ -15,7 +15,7 @@ its output.
   1149756166
   >>> consistent_hash('')
   0
-  >>> consistent_hash('0')
-  4108050209
+  >>> consistent_hash('0') == 4108050209
+  True
 
 (More tests needed, obviously.)
