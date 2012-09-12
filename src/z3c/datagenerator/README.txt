@@ -11,8 +11,8 @@ An essential part of this package is a consistent hash generator.  Verify
 its output.
 
   >>> from z3c.datagenerator.generator import consistent_hash
-  >>> consistent_hash('seed')
-  1149756166
+  >>> consistent_hash('seed') == 1149756166
+  True
   >>> consistent_hash('')
   0
   >>> consistent_hash('0') == 4108050209
