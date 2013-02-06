@@ -15,6 +15,8 @@ CHANGES
 
 - Bug: Make sure that all files are closed properly.
 
+- Bug: When generating a username, make sure it does not include any special
+  characters passed through by the first or lastname, for example "O'Dorothy".
 
 1.0.0 (2013-02-06)
 ------------------
