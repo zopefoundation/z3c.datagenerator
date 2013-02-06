@@ -13,6 +13,7 @@
 ##############################################################################
 """Demographics Data Generators"""
 __docformat__ = "reStructuredText"
+import io
 import os
 import random
 import zope.interface
@@ -47,7 +48,7 @@ class SSNDataGenerator(object):
 
     def getMany(self, number):
         """Select a set of values from the values list and return them."""
-        return [self.get() for count in xrange(number)]
+        return [self.get() for count in range(number)]
 
 
 class AddressDataGenerator(object):
@@ -63,17 +64,21 @@ class AddressDataGenerator(object):
         self.random = random.Random(generator.consistent_hash(seed+'address'))
         path = os.path.dirname(__file__)
 
-        file = open(os.path.join(path, self.streetNamesFile), 'r')
-        self.streetNames = [unicode(e.strip()) for e in file.readlines()]
+        with io.open(os.path.join(path, self.streetNamesFile), 'r',
+                  encoding='latin-1') as file:
+            self.streetNames = [e.strip() for e in file.readlines()]
 
-        file = open(os.path.join(path, self.streetPostfixFile), 'r')
-        self.streetPostfix = [unicode(e.strip()) for e in file.readlines()]
+        with io.open(os.path.join(path, self.streetPostfixFile), 'r',
+                     encoding='latin-1') as file:
+            self.streetPostfix = [e.strip() for e in file.readlines()]
 
-        file = open(os.path.join(path, self.citiesFile), 'r')
-        self.cities = [unicode(e.strip()) for e in file.readlines()]
+        with io.open(os.path.join(path, self.citiesFile), 'r',
+                     encoding='latin-1') as file:
+            self.cities = [e.strip() for e in file.readlines()]
 
-        file = open(os.path.join(path, self.statesFile), 'r')
-        self.states = [unicode(e.strip()) for e in file.readlines()]
+        with io.open(os.path.join(path, self.statesFile), 'r',
+                     encoding='latin-1') as file:
+            self.states = [e.strip() for e in file.readlines()]
 
     def getStreet(self):
         street = u'%i ' % self.random.randint(1, 2000)
@@ -98,7 +103,7 @@ class AddressDataGenerator(object):
 
     def getMany(self, number):
         """Select a set of values from the values list and return them."""
-        return [self.get() for count in xrange(number)]
+        return [self.get() for count in range(number)]
 
 
 class PhoneDataGenerator(object):
@@ -119,4 +124,4 @@ class PhoneDataGenerator(object):
 
     def getMany(self, number):
         """Select a set of values from the values list and return them."""
-        return [self.get() for count in xrange(number)]
+        return [self.get() for count in range(number)]

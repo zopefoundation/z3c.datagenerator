@@ -16,6 +16,7 @@ __docformat__ = "reStructuredText"
 import csv
 import datetime
 import math
+import io
 import os
 import random
 from zlib import crc32
@@ -23,16 +24,15 @@ import zope.interface
 
 from z3c.datagenerator import interfaces
 
-
 def consistent_hash(buf):
     # Produce a hash of a string that behaves consistently in Python 32 and
     # 64 bit.  The "& 0xffffffff" interprets negative numbers as positive.
-    return crc32(buf) & 0xffffffff
+    return crc32(buf.encode('UTF-8')) & 0xffffffff
 
 
+@zope.interface.implementer(interfaces.IDataGenerator)
 class VocabularyDataGenerator(object):
     """Vocabulary-based data generator"""
-    zope.interface.implements(interfaces.IDataGenerator)
 
     def __init__(self, seed, vocabulary):
         self.random = random.Random(consistent_hash(seed))
@@ -48,9 +48,9 @@ class VocabularyDataGenerator(object):
                 for term in self.random.sample(self.vocabulary, number)]
 
 
+@zope.interface.implementer(interfaces.IFileBasedGenerator)
 class FileDataGenerator(object):
     """Base functionality for a file data generator."""
-    zope.interface.implements(interfaces.IFileBasedGenerator)
 
     path = os.path.dirname(__file__)
 
@@ -72,9 +72,9 @@ class CSVDataGenerator(FileDataGenerator):
 
     def _read(self, filename):
         fullpath = os.path.join(self.path, filename)
-        reader = csv.reader(file(fullpath), delimiter=';')
-        return [[unicode(cell) for cell in row]
-                for row in reader]
+        with io.open(fullpath, 'r', encoding='latin-1') as file:
+            reader = csv.reader(file, delimiter=';')
+            return [[cell for cell in row] for row in reader]
 
 
 class TextDataGenerator(FileDataGenerator):
@@ -82,13 +82,13 @@ class TextDataGenerator(FileDataGenerator):
 
     def _read(self, filename):
         fullpath = os.path.join(self.path, filename)
-        return [unicode(e.strip(), encoding='latin-1')
-                for e in open(fullpath, 'r').readlines()]
+        with io.open(fullpath, 'r', encoding='latin-1') as file:
+            return [e.strip() for e in file.readlines()]
 
 
+@zope.interface.implementer(interfaces.IDateDataGenerator)
 class DateDataGenerator(object):
     """A date data generator."""
-    zope.interface.implements(interfaces.IDateDataGenerator)
 
     def __init__(self, seed, start=None, end=None):
         self.random = random.Random(consistent_hash(seed+'date'))
@@ -104,7 +104,7 @@ class DateDataGenerator(object):
 
     def getMany(self, number):
         """Select a set of values from the values list and return them."""
-        return [self.get() for count in xrange(number)]
+        return [self.get() for count in range(number)]
 
 
 class IdDataGenerator(object):
@@ -130,9 +130,9 @@ class IdDataGenerator(object):
         value = self.prefix
         value += self.separator.join(
             self._num_format % randint(0, self.max_value)
-            for idx in xrange(self.numbers))
+            for idx in range(self.numbers))
         return value
 
     def getMany(self, number):
         """Select a set of values from the values list and return them."""
-        return [self.get() for count in xrange(number)]
+        return [self.get() for count in range(number)]

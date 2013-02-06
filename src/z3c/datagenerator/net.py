@@ -20,9 +20,9 @@ import zope.interface
 from z3c.datagenerator import demographics, generator, interfaces
 
 
+@zope.interface.implementer(interfaces.IDataGenerator)
 class IPv4DataGenerator(object):
     """IPv4 generator."""
-    zope.interface.implements(interfaces.IDataGenerator)
 
     def __init__(self, seed):
         self.random = random.Random(generator.consistent_hash(seed+'ip'))
@@ -35,12 +35,12 @@ class IPv4DataGenerator(object):
 
     def getMany(self, number):
         """Select a set of values from the values list and return them."""
-        return [self.get() for count in xrange(number)]
+        return [self.get() for count in range(number)]
 
 
+@zope.interface.implementer(interfaces.IDataGenerator)
 class UsernameDataGenerator(object):
     """Username generator."""
-    zope.interface.implements(interfaces.IDataGenerator)
 
     pattern = u'%(firstInitial)s%(lastName)s'
 
@@ -51,27 +51,25 @@ class UsernameDataGenerator(object):
         if pattern:
             self.pattern = pattern
 
-
     def get(self, firstName=None, lastName=None):
         """Select a value from the values list and return it."""
         fname = firstName or self.firstNames.get()
         lname = lastName or self.lastNames.get()
         return self.pattern % {
-            'firstName':     fname.lower(),
-            'lastName':      lname.lower(),
+            'firstName':     ''.join(c for c in fname.lower() if c.isalnum()),
+            'lastName':      ''.join(c for c in lname.lower() if c.isalnum()),
             'firstInitial':  fname[0].lower(),
             'lastInitial':   lname[0].lower(),
             'number':        self.random.randint(1, 100)}
 
-
     def getMany(self, number):
         """Select a set of values from the values list and return them."""
-        return [self.get() for count in xrange(number)]
+        return [self.get() for count in range(number)]
 
 
+@zope.interface.implementer(interfaces.IDataGenerator)
 class EMailDataGenerator(object):
     """E-Mail generator."""
-    zope.interface.implements(interfaces.IDataGenerator)
 
     wordsFile = 'words.txt'
     tldsFile = 'gTLD.csv'
@@ -95,4 +93,4 @@ class EMailDataGenerator(object):
 
     def getMany(self, number):
         """Select a set of values from the values list and return them."""
-        return [self.get() for count in xrange(number)]
+        return [self.get() for count in range(number)]

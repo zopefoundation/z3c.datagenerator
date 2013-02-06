@@ -11,19 +11,16 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-"""Test Setup
-
-$Id$
-"""
-__docformat__ = "reStructuredText"
-
+"""Test Setup"""
 import doctest
+import sys
 import unittest
 from zope.testing.doctestunit import DocFileSuite
 
 def test_suite():
+    filename = 'README3.txt' if sys.version_info[0] == 3 else 'README.txt'
     return unittest.TestSuite((
-        DocFileSuite('../README.txt',
+        DocFileSuite('../'+filename,
                      optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
                      ),
         ))

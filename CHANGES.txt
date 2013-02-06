@@ -2,10 +2,12 @@
 CHANGES
 =======
 
-1.0.1 (unreleased)
+2.0.0 (2013-02-06)
 ------------------
 
-- Nothing changed yet.
+- Feature: Support for Python 3.
+
+- Bug: Make sure that all files are closed properly.
 
 
 1.0.0 (2013-02-06)
