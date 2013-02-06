@@ -35,7 +35,6 @@ setup (
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: Zope Public License',
-        'Programming Language :: Python',
         'Natural Language :: English',
         'Operating System :: OS Independent',
         'Topic :: Software Development :: Libraries :: Python Modules',
