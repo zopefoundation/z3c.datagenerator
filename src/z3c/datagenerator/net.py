@@ -11,10 +11,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-"""Demographics Data Generators
-
-$Id$
-"""
+"""Demographics Data Generators"""
 __docformat__ = "reStructuredText"
 import os
 import random
@@ -33,8 +30,8 @@ class IPv4DataGenerator(object):
     def get(self):
         """Select a value from the values list and return it."""
         return '%.3i.%.3i.%.3i.%.3i' %(
-            random.randint(1, 255), random.randint(0, 255),
-            random.randint(0, 255), random.randint(0, 255))
+            self.random.randint(1, 255), self.random.randint(0, 255),
+            self.random.randint(0, 255), self.random.randint(0, 255))
 
     def getMany(self, number):
         """Select a set of values from the values list and return them."""
@@ -47,10 +44,12 @@ class UsernameDataGenerator(object):
 
     pattern = u'%(firstInitial)s%(lastName)s'
 
-    def __init__(self, seed):
+    def __init__(self, seed, pattern=None):
         self.random = random.Random(generator.consistent_hash(seed+'username'))
         self.firstNames = demographics.FirstNameGenerator(seed)
         self.lastNames = demographics.LastNameGenerator(seed)
+        if pattern:
+            self.pattern = pattern
 
 
     def get(self, firstName=None, lastName=None):
@@ -80,7 +79,7 @@ class EMailDataGenerator(object):
     pattern = '%(uname)s@%(domain)s%(tld)s'
 
     def __init__(self, seed):
-        self.random = random.Random(generator.consistent_hash(seed+'username'))
+        self.random = random.Random(generator.consistent_hash(seed+'enail'))
         self.usernames = UsernameDataGenerator(seed)
         self.words = generator.TextDataGenerator(seed, self.wordsFile)
         self.tlds = generator.CSVDataGenerator(seed, self.tldsFile)

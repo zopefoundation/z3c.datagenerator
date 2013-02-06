@@ -2,10 +2,18 @@
 CHANGES
 =======
 
-0.0.4 (unreleased)
+1.0.0 (2013-02-06)
 ------------------
 
-- Windows: ``consistent_hash`` make the return value an ``int``
+- Feature: Added tests for all data generators.
+
+- Feature: Added an ID data generator that can generate all sorts of IDs that
+  could occur in systems.
+
+- Feature: To properly support Windows, ``consistent_hash()`` returns an
+  integer.
+
+- Bug: The IPv4 generator ignored the seed making the generator "unstable".
 
 0.0.3 (2008-12-03)
 ------------------

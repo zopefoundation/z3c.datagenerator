@@ -11,10 +11,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-"""Setup
-
-$Id:$
-"""
+"""Setup"""
 import os
 from setuptools import setup, find_packages
 
@@ -23,27 +20,29 @@ def read(*rnames):
 
 setup (
     name='z3c.datagenerator',
-    version='0.0.4dev',
+    version='1.0.0',
     author = "Stephan Richter and the Zope Community",
     author_email = "zope3-dev@zope.org",
-    description = "Datagenerator for z3c.sampledata",
+    description = "Datagenerator for Testing and Sample Data",
     long_description=(
         read('README.txt')
         + '\n\n' +
         read('CHANGES.txt')
         ),
     license = "ZPL 2.1",
-    keywords = "zope3 z3c data generator sampledata",
+    keywords = "data generator sampledata",
     classifiers = [
-        'Development Status :: 4 - Beta',
-        'Environment :: Web Environment',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: Zope Public License',
         'Programming Language :: Python',
         'Natural Language :: English',
         'Operating System :: OS Independent',
-        'Topic :: Internet :: WWW/HTTP',
-        'Framework :: Zope3'],
+        'Topic :: Software Development :: Libraries :: Python Modules',
+        'Topic :: Utilities',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 2.6',
+        'Programming Language :: Python :: 2.7'],
     url = 'http://cheeseshop.python.org/pypi/z3c.datagenerator',
     packages = find_packages('src'),
     include_package_data = True,

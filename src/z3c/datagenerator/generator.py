@@ -11,13 +11,11 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-"""Data Generators
-
-$Id$
-"""
+"""Data Generators"""
 __docformat__ = "reStructuredText"
 import csv
 import datetime
+import math
 import os
 import random
 from zlib import crc32
@@ -93,7 +91,7 @@ class DateDataGenerator(object):
     zope.interface.implements(interfaces.IDateDataGenerator)
 
     def __init__(self, seed, start=None, end=None):
-        self.random = random.Random(consistent_hash(seed+'ssn'))
+        self.random = random.Random(consistent_hash(seed+'date'))
         self.start = start or datetime.date(2000, 1, 1)
         self.end = end or datetime.date(2007, 1, 1)
 
@@ -103,6 +101,37 @@ class DateDataGenerator(object):
         end = end or self.end
         delta = end - start
         return start + datetime.timedelta(self.random.randint(0, delta.days))
+
+    def getMany(self, number):
+        """Select a set of values from the values list and return them."""
+        return [self.get() for count in xrange(number)]
+
+
+class IdDataGenerator(object):
+    """An ID data generator."""
+
+    prefix = 'ID'
+    separator = '-'
+    numbers = 4
+    max_value = 99
+
+    def __init__(self, seed, prefix='ID', separator='-', numbers=4,
+                 max_value=99):
+        self.random = random.Random(consistent_hash(seed + 'id'))
+        self.prefix = prefix
+        self.separator = separator
+        self.numbers = numbers
+        self.max_value = max_value
+        self._num_format = '%.' + str(int(math.log10(self.max_value + 1))) + 'i'
+
+    def get(self):
+        """Compute a social security number."""
+        randint = self.random.randint
+        value = self.prefix
+        value += self.separator.join(
+            self._num_format % randint(0, self.max_value)
+            for idx in xrange(self.numbers))
+        return value
 
     def getMany(self, number):
         """Select a set of values from the values list and return them."""

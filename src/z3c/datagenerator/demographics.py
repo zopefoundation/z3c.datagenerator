@@ -11,10 +11,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-"""Demographics Data Generators
-
-$Id$
-"""
+"""Demographics Data Generators"""
 __docformat__ = "reStructuredText"
 import os
 import random
@@ -108,15 +105,17 @@ class PhoneDataGenerator(object):
     """A phone data generator."""
 
     template = u'%i-%.3i-%.4i'
+    fivesAreaCode = False
 
-    def __init__(self, seed):
-        self.random = random.Random(generator.consistent_hash(seed+'ssn'))
+    def __init__(self, seed, fivesAreaCode=False):
+        self.random = random.Random(generator.consistent_hash(seed+'phone'))
+        self.fivesAreaCode = fivesAreaCode
 
     def get(self):
         """Compute a social security number."""
         randint = self.random.randint
-        return self.template %(
-            randint(100, 999), randint(1, 999), randint(1, 9999))
+        areaCode = 555 if self.fivesAreaCode else randint(100, 999)
+        return self.template %(areaCode, randint(1, 999), randint(1, 9999))
 
     def getMany(self, number):
         """Select a set of values from the values list and return them."""
