@@ -2,7 +2,7 @@
 CHANGES
 =======
 
-2.0.1 (unreleased)
+2.0.1 (2013-02-12)
 ------------------
 
 - Updated manifest to include buildout and tox configuration files.
