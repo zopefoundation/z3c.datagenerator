@@ -5,7 +5,11 @@ CHANGES
 2.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Updated manifest to include buildout and tox configuration files.
+
+- Updated Trove classifiers.
+
+- Renamed text files from *.txt to *.rst,s o Github renders them nicely.
 
 
 2.0.0 (2013-02-06)

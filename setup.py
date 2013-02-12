@@ -25,9 +25,9 @@ setup (
     author_email = "zope3-dev@zope.org",
     description = "Datagenerator for Testing and Sample Data",
     long_description=(
-        read('README.txt')
+        read('README.rst')
         + '\n\n' +
-        read('CHANGES.txt')
+        read('CHANGES.rst')
         ),
     license = "ZPL 2.1",
     keywords = "data generator sampledata",
@@ -37,12 +37,17 @@ setup (
         'License :: OSI Approved :: Zope Public License',
         'Natural Language :: English',
         'Operating System :: OS Independent',
-        'Topic :: Software Development :: Libraries :: Python Modules',
-        'Topic :: Utilities',
         'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.3'],
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: Implementation :: CPython',
+        'Programming Language :: Python :: Implementation :: PyPy',
+        'Topic :: Software Development :: Libraries :: Python Modules',
+        'Topic :: Utilities',
+        ],
     url = 'http://cheeseshop.python.org/pypi/z3c.datagenerator',
     packages = find_packages('src'),
     include_package_data = True,

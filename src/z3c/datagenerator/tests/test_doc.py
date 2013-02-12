@@ -18,7 +18,7 @@ import unittest
 from zope.testing.doctestunit import DocFileSuite
 
 def test_suite():
-    filename = 'README3.txt' if sys.version_info[0] == 3 else 'README.txt'
+    filename = 'README3.rst' if sys.version_info[0] == 3 else 'README.rst'
     return unittest.TestSuite((
         DocFileSuite('../'+filename,
                      optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
