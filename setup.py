@@ -48,7 +48,7 @@ setup (
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Utilities',
         ],
-    url = 'http://cheeseshop.python.org/pypi/z3c.datagenerator',
+    url = 'http://pypi.python.org/pypi/z3c.datagenerator',
     packages = find_packages('src'),
     include_package_data = True,
     package_dir = {'':'src'},
