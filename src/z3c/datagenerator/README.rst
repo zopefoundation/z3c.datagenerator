@@ -73,7 +73,7 @@ This generator creates last names from a predefined set.
   >>> gen = demographics.LastNameGenerator('seed')
 
   >>> gen.get()
-   u'Lambert'
+  u'Lambert'
   >>> gen.getMany(3)
   [u'Oliver', u'Meyer', u'Jones']
 

@@ -3,7 +3,9 @@ Data Generators
 ===============
 
 :Note: This is the Python 3 version of the documentation. The random number
-       generator changed, so that the output will differ!
+       generator changed, so that the output will differ! For now, we are
+       using `random2` as long as we support Python 2, but once that support
+       is dropped, the README.txt cann be replaced with this file.
 
 Data Generators are meant to create data for your application quickly. They
 are most useful for generating sample data. Sample Data, in turn, allows you

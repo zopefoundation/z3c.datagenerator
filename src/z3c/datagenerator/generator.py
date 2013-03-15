@@ -18,9 +18,9 @@ import datetime
 import math
 import io
 import os
-import random
-from zlib import crc32
+import random2 as random
 import zope.interface
+from zlib import crc32
 
 from z3c.datagenerator import interfaces
 

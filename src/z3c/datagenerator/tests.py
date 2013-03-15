@@ -13,16 +13,25 @@
 ##############################################################################
 """Test Setup"""
 import doctest
+import re
 import sys
 import unittest
-from zope.testing.doctestunit import DocFileSuite
+from zope.testing import renormalizing
+
+checker = renormalizing.RENormalizing([
+    # Python 3 unicode removed the "u".
+    (re.compile("(?<![a-zA-Z])u('.*?')"),
+     r"\1"),
+    ])
+
 
 def test_suite():
-    filename = 'README3.rst' if sys.version_info[0] == 3 else 'README.rst'
     return unittest.TestSuite((
-        DocFileSuite('../'+filename,
-                     optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
-                     ),
+        doctest.DocFileSuite(
+                'README.rst',
+                checker=checker,
+                optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS,
+                ),
         ))
 
 if __name__ == '__main__':

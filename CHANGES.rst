@@ -2,10 +2,13 @@
 CHANGES
 =======
 
-2.0.2 (unreleased)
+2.1.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Switched code base to use ``random2``, so that Python 2 and 3 have the same
+  output. No need for running different test files now.
+
+- Simplified and unified test setup.
 
 
 2.0.1 (2013-02-12)

@@ -14,7 +14,7 @@
 """Demographics Data Generators"""
 __docformat__ = "reStructuredText"
 import os
-import random
+import random2 as random
 import zope.interface
 
 from z3c.datagenerator import demographics, generator, interfaces

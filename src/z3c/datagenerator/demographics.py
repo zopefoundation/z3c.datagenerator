@@ -15,7 +15,7 @@
 __docformat__ = "reStructuredText"
 import io
 import os
-import random
+import random2 as random
 import zope.interface
 
 from z3c.datagenerator import generator
