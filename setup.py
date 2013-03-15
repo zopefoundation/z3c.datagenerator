@@ -20,7 +20,7 @@ def read(*rnames):
 
 setup (
     name='z3c.datagenerator',
-    version='2.1.0.dev0',
+    version='2.1.0',
     author = "Stephan Richter and the Zope Community",
     author_email = "zope3-dev@zope.org",
     description = "Datagenerator for Testing and Sample Data",

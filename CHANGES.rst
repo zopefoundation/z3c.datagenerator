@@ -2,7 +2,7 @@
 CHANGES
 =======
 
-2.1.0 (unreleased)
+2.1.0 (2013-03-15)
 ------------------
 
 - Switched code base to use ``random2``, so that Python 2 and 3 have the same
