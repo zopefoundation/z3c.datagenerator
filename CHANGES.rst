@@ -5,7 +5,8 @@ CHANGES
 2.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Bug: FileDataGenerator used the full filename to generate the random seed.
+  That is definitely going to break consistency/tests on someone else's system.
 
 
 2.1.0 (2013-03-15)

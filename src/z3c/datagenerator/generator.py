@@ -24,6 +24,7 @@ from zlib import crc32
 
 from z3c.datagenerator import interfaces
 
+
 def consistent_hash(buf):
     # Produce a hash of a string that behaves consistently in Python 32 and
     # 64 bit.  The "& 0xffffffff" interprets negative numbers as positive.
@@ -55,7 +56,8 @@ class FileDataGenerator(object):
     path = os.path.dirname(__file__)
 
     def __init__(self, seed, filename):
-        self.random = random.Random(consistent_hash(seed+filename))
+        justname = os.path.basename(filename)
+        self.random = random.Random(consistent_hash(seed+justname))
         self.values = self._read(filename)
 
     def get(self):
