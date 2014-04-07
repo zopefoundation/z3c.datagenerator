@@ -2,7 +2,7 @@
 CHANGES
 =======
 
-2.1.1 (unreleased)
+2.1.1 (2014-04-07)
 ------------------
 
 - Bug: FileDataGenerator used the full filename to generate the random seed.
