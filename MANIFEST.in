@@ -7,3 +7,6 @@ include tox.ini
 recursive-include src *
 
 global-exclude *.pyc
+
+# added by check_manifest.py
+include .travis.yml
